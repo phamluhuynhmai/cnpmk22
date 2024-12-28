@@ -1,0 +1,18 @@
+.lostContainer{
+  width:100%;
+  height: 100%;
+  background-image: url('./../../../assets/pageNotFound.svg');
+  background-size: cover;
+  background-position: center;
+  color: #659349;
+  text-align: center;
+
+
+  button {
+    width:20%;
+    height:50px;
+    background-color: #659349;
+    margin-top: calc(100vh - 70px);
+    text-transform: uppercase;
+  }
+}

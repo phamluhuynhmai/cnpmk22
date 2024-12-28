@@ -1,0 +1,6 @@
+input:focus,
+.form-control:focus {
+    outline: none;
+    border-color: #28a745 !important;  /* màu xanh lá */
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;  /* hiệu ứng glow màu xanh lá nhạt */
+} 
