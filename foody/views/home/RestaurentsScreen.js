@@ -38,6 +38,7 @@ const RestaurentsScreen = ({ navigation }) => {
           },
           { text: 'Có', onPress: () => {
             navigation.replace('StartScreen')
+            navigation.navigate('LoginScreen')
           }},
         ],
         { cancelable: false }
@@ -125,7 +126,7 @@ const RestaurentsScreen = ({ navigation }) => {
       <View style={styles.container}>
         <View style={{ flexDirection: "row", alignItems: 'center'}}>
           <View style={{ flex: 1 }}>
-            <Text style={{fontSize:20, fontWeight:'bold'}}> Hé lô {route.params.user.name}</Text>
+            <Text style={{fontSize:20, fontWeight:'bold'}}> Xin chào {route.params.user.name}</Text>
             <View 
               style={{ 
                 flexDirection: "row", 

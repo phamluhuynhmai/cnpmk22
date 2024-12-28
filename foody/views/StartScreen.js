@@ -14,9 +14,9 @@ const StartScreen = ({ navigation }) => {
       </View>
       <View style={styles.footer} >
         <Text style={styles.title}>
-          Xài liền lẹ lên
+          Programming Interns
         </Text>
-        <Text style={styles.text}>1 2 3 géc gô</Text>
+        <Text style={styles.text}>Mời bạn đăng nhập hoặc đăng ký</Text>
         <View style={styles.btnView}>
           <Button 
             mode="contained" 

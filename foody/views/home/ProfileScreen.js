@@ -20,7 +20,6 @@ const ProfileScreen = ({ navigation }) => {
   const [telephone, setTelephone] = useState("");
   const [adresse, setAdresse] = useState("");
   const [district, setDistrict] = useState("");
-  const [ward, setWard] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -82,11 +81,11 @@ const ProfileScreen = ({ navigation }) => {
       setLoading(false)
     }else {
       await axios.put(`${API}/auth/profile/${route.params.user._id}`, {
-        nom: nom,
-        prenom:prenom,
-        telephone: telephone,
-        adresse:adresse,
-        state:district
+        name: nom,
+        surname: prenom,
+        phone: telephone,
+        address: adresse,
+        state: district.title
       }).then((result) => {
         if(result.data.success) {
           toast.show(result.data.message, {
@@ -103,6 +102,8 @@ const ProfileScreen = ({ navigation }) => {
           setAdresse("");
           setDistrict("");
           setWard("");
+          navigation.popToTop();
+          navigation.replace("StartScreen");
           navigation.navigate("LoginScreen");
         }else {
           toast.show(result.data.message, {

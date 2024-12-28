@@ -86,7 +86,7 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <View style={styles.main} >
         <Text style={{fontSize: 30, color: '#659349', fontWeight: 'bold'}}>
-            Chào mừng elm
+            Đăng nhập
         </Text>
         <View style={styles.inputView}>
           <TextInput
@@ -113,7 +113,7 @@ const LoginScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('ResetPasswordScreen')}
           >
-            <Text style={styles.forgot}>Quên mật khẩu hả?</Text>
+            <Text style={styles.forgot}>Quên mật khẩu?</Text>
           </TouchableOpacity>
         </View>
         <Button 
