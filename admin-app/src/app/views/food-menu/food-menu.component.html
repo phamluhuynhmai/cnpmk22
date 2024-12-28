@@ -31,7 +31,7 @@
             <th mat-header-cell *matHeaderCellDef> Quán ăn </th>
             <td mat-cell *matCellDef="let element">
               <div *ngFor="let restaurant of restaurants">
-                {{element.restaurantId == restaurant._id ? restaurant.name : element.restaurantId}} 
+                {{element.restaurantId == restaurant._id ? restaurant.name : ''}} 
               </div>
             </td>
           </ng-container>

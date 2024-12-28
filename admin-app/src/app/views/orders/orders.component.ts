@@ -73,7 +73,7 @@ export class OrdersComponent implements OnInit {
 
   validateOrder(id:string, status:boolean) {
     if(status) {
-      this._snackBar.open('Le Commande déja valide', 'Done')
+      this._snackBar.open('Đơn hàng đã được duyệt trước đó', 'Done')
     }else {
       this.orderService.validateOrder(id, this.statut).subscribe((data) => {
         if(data.success) {

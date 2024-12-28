@@ -39,7 +39,7 @@
               <th mat-header-cell *matHeaderCellDef> Menu </th>
               <td mat-cell *matCellDef="let element">
                 <div *ngFor="let menu of menus">
-                  {{element.menuId == menu._id ? menu.name : element.menuId}} 
+                  {{element.menuId == menu._id ? menu.name : ''}} 
                 </div>
               </td>
             </ng-container>

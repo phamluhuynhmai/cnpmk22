@@ -56,7 +56,8 @@ const ChangeEmailScreen = ({ navigation }) => {
           setLoading(false);
           setCurrentEmail('');
           setNewEmail('');
-          navigation.popTo("LoginScreen");
+          navigation.popToTop();
+          navigation.replace("LoginScreen");
         }else {
           toast.show(result.data.message, {
             type: "danger",

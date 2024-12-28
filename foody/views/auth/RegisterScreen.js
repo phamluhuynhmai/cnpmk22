@@ -67,8 +67,8 @@ const RegisterScreen = ({ navigation }) => {
       })
       setLoading(false)
     }
-    /*else if(!district) {
-      toast.show("State is required !", {
+    else if(!district) {
+      toast.show("Bắt buộc phải nhập quận / huyện!", {
         type: "danger",
         placement:"bottom",
         duration: 4000,
@@ -76,7 +76,7 @@ const RegisterScreen = ({ navigation }) => {
         animationType: "zoom-in",
       })
       setLoading(false)
-    }*/
+    }
     else if(!email) {
       toast.show("Bắt buộc nhập email!", {
         type: "danger",
@@ -102,7 +102,7 @@ const RegisterScreen = ({ navigation }) => {
         surname:surname,
         phone: phone,
         address:address,
-        state:district,
+        state:district.title,
         email:email,
         password: password
       }).then((result) => {
@@ -226,7 +226,7 @@ const RegisterScreen = ({ navigation }) => {
               onSelect={(selectedItem, index) => {
                 // console.log(selectedItem, index);
                 // setDistrict(selectedItem)
-                setWard(selectedItem)
+                // setWard(selectedItem)
               }}
               renderButton={(selectedItem, isOpened) => {
                 return (
