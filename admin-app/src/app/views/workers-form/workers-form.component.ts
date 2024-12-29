@@ -82,14 +82,19 @@ export class WorkersFormComponent implements OnInit {
         }
       });
     }else {
+      var id = this.workerForm.get('restaurantId')?.value
+      console.log(id)
+      var state = this.dataSource.find(p => p._id == id)?.state
+      console.log(state)
       this.workerService.createWorker(
         this.workerForm.get('name')?.value, 
         this.workerForm.get('surname')?.value,
         this.workerForm.get('phone')?.value, 
         this.workerForm.get('email')?.value,
         this.workerForm.get('password')?.value, 
-        this.workerForm.get('state')?.value,
-        this.workerForm.get('restaurantId')?.value
+        // this.workerForm.get('state')?.value,
+        state,
+        id
       )
       .subscribe((data) => {
         if(data.success){
