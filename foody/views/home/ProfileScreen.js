@@ -101,7 +101,7 @@ const ProfileScreen = ({ navigation }) => {
           setTelephone("");
           setAdresse("");
           setDistrict("");
-          setWard("");
+          // setWard("");
           navigation.popToTop();
           navigation.replace("StartScreen");
           navigation.navigate("LoginScreen");
@@ -203,7 +203,7 @@ const ProfileScreen = ({ navigation }) => {
               onSelect={(selectedItem, index) => {
                 // console.log(selectedItem, index);
                 // setDistrict(selectedItem)
-                setWard(selectedItem)
+                // setWard(selectedItem)
               }}
               renderButton={(selectedItem, isOpened) => {
                 return (

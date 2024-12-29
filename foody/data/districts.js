@@ -299,7 +299,7 @@ export const districts = [
     },
     {
       title: 'Huyện Bình Chánh',
-      values: [
+      value: [
         'Thị trấn Tân Túc',
         'An Phú Tây',
         'Bình Chánh',
@@ -320,7 +320,7 @@ export const districts = [
     },
     {
       title: 'Huyện Cần Giờ',
-      values: [
+      value: [
         'Thị trấn Cần Thạnh',
         'An Thới Đông',
         'Bình Khánh',
@@ -332,7 +332,7 @@ export const districts = [
     },
     {
       title: 'Huyện Củ Chi',
-      values: [
+      value: [
         'Thị trấn Củ Chi',
         'An Nhơn Tây',
         'An Phú',
@@ -358,7 +358,7 @@ export const districts = [
     },
     {
       title: 'Huyện Hóc Môn',
-      values: [
+      value: [
         'Thị trấn Hóc Môn',
         'Bà Điểm',
         'Đông Thạnh',
@@ -375,7 +375,7 @@ export const districts = [
     },
     {
       title: 'Huyện Nhà Bè',
-      values: [
+      value: [
         'Thị trấn Nhà Bè',
         'Hiệp Phước',
         'Long Thới',
