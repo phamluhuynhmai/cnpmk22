@@ -24,6 +24,7 @@ export class RestaurentFormComponent implements OnInit {
   id: string;
   action: string;
   districts: {title: string, value: string[]}[] = districts
+  wards: string[] = []
 
   constructor(
     private restaurantService: RestaurantService, 
@@ -83,5 +84,9 @@ export class RestaurentFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  setDistrict(district: string){
+    this.wards = districts.find(d => d.title == district)?.value || []
   }
 }
