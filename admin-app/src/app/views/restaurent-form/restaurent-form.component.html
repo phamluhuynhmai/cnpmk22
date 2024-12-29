@@ -20,7 +20,7 @@
               <mat-form-field appearance="outline">
                 <mat-label>Địa điểm</mat-label>
                 <mat-select formControlName="state">
-                  <!-- <mat-option *ngFor="let item of dataSource" [value]="item._id">{{ item.title }}</mat-option> -->
+                  <mat-option *ngFor="let item of districts" [value]="item.title">{{ item.title }}</mat-option>
 
                   <!-- <mat-option value="Q1">Quận 1</mat-option>
                   <mat-option value="Q3">Quận 3</mat-option>

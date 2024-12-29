@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { districts } from '../../../assets/districts'
 
 @Component({
   selector: 'app-restaurent-form',
@@ -22,6 +23,7 @@ export class RestaurentFormComponent implements OnInit {
 
   id: string;
   action: string;
+  districts: {title: string, value: string[]}[] = districts
 
   constructor(
     private restaurantService: RestaurantService, 
