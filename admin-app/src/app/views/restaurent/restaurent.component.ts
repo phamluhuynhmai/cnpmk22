@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Restaurant } from 'src/app/interfaces/Restaurant';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import { FoodmenuService } from 'src/app/services/foodmenu.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -18,6 +19,7 @@ export class RestaurentComponent implements OnInit {
 
   constructor(
     private restaurantService: RestaurantService, 
+    private foodMenuService: FoodmenuService,
     private router: Router, 
     private _snackBar: MatSnackBar,
   ) { }
@@ -41,6 +43,12 @@ export class RestaurentComponent implements OnInit {
   }
 
   deleteRestaurent(id:string) {
+    this.foodMenuService.getListMenu(id).subscribe((data) => {
+      if (data.menus.length > 0) {
+        this._snackBar.open('Xóa không thành công: quán ăn có menu', 'Done');
+        return;
+      }
+    })
     this.restaurantService.deleteRestaurent(id).subscribe((data) => {
       if(data.success) {
         this.getListRestaurent();

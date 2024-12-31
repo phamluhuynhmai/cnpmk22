@@ -3,6 +3,7 @@ import { Menu } from 'src/app/interfaces/Menu';
 import { Restaurant } from 'src/app/interfaces/Restaurant';
 import { FoodmenuService } from 'src/app/services/foodmenu.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import { ItemService } from 'src/app/services/item.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -23,6 +24,7 @@ export class FoodMenuComponent implements OnInit {
   constructor(
     private foodmenuService: FoodmenuService, 
     private restaurantService: RestaurantService,
+    private itemService: ItemService, 
     private router: Router, 
     private activateRoute : ActivatedRoute,
     private _snackBar: MatSnackBar,
@@ -58,9 +60,12 @@ export class FoodMenuComponent implements OnInit {
   }
 
   deleteFoodMenu(id:string) {
-    if (this.dataSource.length > 0)
-      this._snackBar.open('Xóa không thành công, menu có sản phẩm', 'Done');
-    else
+    this.itemService.getListItem(id).subscribe((data) => {
+      if (data.items.length > 0) {
+        this._snackBar.open('Xóa không thành công, menu có sản phẩm', 'Done');
+        return;
+      }
+    })
     this.foodmenuService.deleteMenu(id).subscribe((data) => {
       if(data.success) {
         this.getListMenu();
@@ -68,7 +73,7 @@ export class FoodMenuComponent implements OnInit {
       }else {
         this._snackBar.open(data.message, 'Done');
       }
-    })
+  })
   }
 
 }
