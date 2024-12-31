@@ -9,6 +9,7 @@ import { useRoute, useFocusEffect, StackActions } from '@react-navigation/native
 import { useDispatch, useSelector } from 'react-redux'
 import { API, HOST } from './../../configs';
 import { cartTotalSelector } from "./../../redux/selector";
+import { addToCart } from './../../redux/features/CartSlice'
 
 const theme = {
   ...DefaultTheme,
@@ -59,6 +60,8 @@ const RestaurentsScreen = ({ navigation }) => {
   const [orders, setOrders] = useState([])
   const [backup, setBackup] = useState([])
   const [searchQuery, setSearchQuery] = useState('');
+
+  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
 
@@ -341,8 +344,8 @@ const RestaurentsScreen = ({ navigation }) => {
                 color={MD2Colors.blue500}
                 size={30}
                 onPress={() =>
-                  console.log(item)
-                  // dispatch(addToCart(item))
+                  // console.log(item)
+                  dispatch(addToCart(item))
                 }
               />
             </View>
