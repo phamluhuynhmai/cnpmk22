@@ -58,6 +58,9 @@ export class FoodMenuComponent implements OnInit {
   }
 
   deleteFoodMenu(id:string) {
+    if (this.dataSource.length > 0)
+      this._snackBar.open('Xóa không thành công, menu có sản phẩm', 'Done');
+    else
     this.foodmenuService.deleteMenu(id).subscribe((data) => {
       if(data.success) {
         this.getListMenu();
