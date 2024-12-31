@@ -20,9 +20,9 @@
             <mat-grid-tile>
               <mat-form-field appearance="outline">
                 <mat-label>Tên</mat-label>
-                <input matInput placeholder="Name" formControlName="name" />
+                <input matInput placeholder="Tên món" formControlName="name" />
                 <mat-error *ngIf="itemForm.get('name')?.hasError('required')">
-                  Nhập tên quán ăn 
+                  Nhập tên món
                 </mat-error>
               </mat-form-field>
             </mat-grid-tile>
