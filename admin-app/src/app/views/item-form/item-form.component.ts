@@ -16,7 +16,7 @@ export class ItemFormComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required]),
   })
-  titre = "Thay món"
+  titre = "Thêm món"
   id: string;
   menuId: string;
   operation: string;

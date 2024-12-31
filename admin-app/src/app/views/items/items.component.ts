@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ItemsComponent implements OnInit {
 
-  titre = "Thêm món"
+  titre = "Sản phẩm"
   displayedColumns: string[] = ['Id', 'Image', 'Name', 'Price', 'Menu','Action'];
   dataSource:Item[] = [] 
   menus:Menu[] = [] 
