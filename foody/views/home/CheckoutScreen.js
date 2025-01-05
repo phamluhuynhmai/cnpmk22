@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput as RNTextInput } from 'react-native'
 import React,{ useState } from 'react'
 import { IconButton, MD2Colors, Badge, Button } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,9 +12,17 @@ import {
 } from "./../../redux/features/CartSlice";
 import { HOST } from './../../configs';
 
+import SelectDropdown from 'react-native-select-dropdown'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { districts as districtsImported } from '../../data/districts';
+
 const CheckoutScreen = ({ navigation }) => {
 
   const [visible, setVisible] = useState(true);
+  
+  const [district, setDistrict] = useState("");
+  const [address, setAddress] = useState("");
+  const districts = districtsImported;
 
   const cart = useSelector((state) => state.cart);
   const totalPrice = useSelector(cartTotalPriceSelector);
@@ -26,6 +34,28 @@ const CheckoutScreen = ({ navigation }) => {
   const route = useRoute();
 
   const onOrderSubmit = async () => {
+  
+    if(!district) {
+      toast.show("Bắt buộc phải chọn quận / huyện!", {
+        type: "danger",
+        placement:"bottom",
+        duration: 4000,
+        offset: 30,
+        animationType: "zoom-in",
+      })
+      return;
+    }
+    if(!address) {
+      toast.show("Bắt buộc phải nhập địa chỉ!", {
+        type: "danger",
+        placement:"bottom",
+        duration: 4000,
+        offset: 30,
+        animationType: "zoom-in",
+      })
+      return;
+    }
+
     await axios.post(`${API}/orders/create`, {
       clientId: route.params.user._id,
       items: cart,
@@ -33,7 +63,10 @@ const CheckoutScreen = ({ navigation }) => {
       totalPrice:totalPrice,
       paymentType: "Cash on delivery",
       paid: false,
-      state:route.params.user.state
+      
+      state: district.title,
+      address: address,
+      
     }).then((result) => {
       if(result.data.success) {
         toast.show(result.data.message, {
@@ -96,6 +129,75 @@ const CheckoutScreen = ({ navigation }) => {
           >
               Tổng cộng: {totalPrice} ₫
           </Button>
+          <Text style={{fontSize:20, fontWeight:'bold', color: '#3C4048', marginBottom:10}}>Nhập địa chỉ giao hàng</Text>
+
+          <SelectDropdown
+            data={districts}
+            onSelect={(selectedItem, index) => {
+              setDistrict(selectedItem)
+            }}
+            renderButton={(selectedItem, isOpened) => {
+              return (
+                <View style={styles.dropdownButtonStyle}>
+                  <Text style={styles.dropdownButtonTxtStyle}>
+                    {(selectedItem && selectedItem.title) || 'Quận / Huyện'}
+                  </Text>
+                  <Icon
+                    name={isOpened ? 'chevron-up' : 'chevron-down'}
+                    style={styles.dropdownButtonArrowStyle}
+                  />
+                </View>
+              );
+            }}
+            renderItem={(item, index, isSelected) => {
+              return (
+                <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
+                  <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
+                </View>
+              );
+            }}
+            showsVerticalScrollIndicator={false}
+            dropdownStyle={styles.dropdownMenuStyle}
+          />
+
+          <SelectDropdown
+            data={[...(districts.find((d) => d.title == district.title) || {value: []}).value]}
+            onSelect={(selectedItem, index) => {
+              // Handle ward selection
+            }}
+            renderButton={(selectedItem, isOpened) => {
+              return (
+                <View style={styles.dropdownButtonStyle}>
+                  <Text style={styles.dropdownButtonTxtStyle}>
+                    {selectedItem || 'Phường / Xã'}
+                  </Text>
+                  <Icon
+                    name={isOpened ? 'chevron-up' : 'chevron-down'}
+                    style={styles.dropdownButtonArrowStyle}
+                  />
+                </View>
+              );
+            }}
+            renderItem={(item, index, isSelected) => {
+              return (
+                <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
+                  <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
+                </View>
+              );
+            }}
+            showsVerticalScrollIndicator={false}
+            dropdownStyle={styles.dropdownMenuStyle}
+          />
+
+          <RNTextInput
+            style={styles.addressInput}
+            placeholder="Nhập địa chỉ cụ thể (số nhà, tên đường...)"
+            placeholderTextColor="#617168"
+            value={address}
+            onChangeText={text => setAddress(text)}
+            multiline={true}
+          />
+          
           <Button 
             mode="contained" 
             buttonColor="#659349"
@@ -167,6 +269,60 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     margin:'1%'
   },
+  
+  dropdownButtonStyle: {
+    width: '100%',
+    marginHorizontal: 0,
+    marginBottom: 10,
+    height: 50,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#888',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+  },
+  dropdownButtonTxtStyle: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#444',
+  },
+  dropdownButtonArrowStyle: {
+    fontSize: 28,
+  },
+  dropdownMenuStyle: {
+    borderRadius: 8,
+  },
+  dropdownItemStyle: {
+    width: '100%',
+    flexDirection: 'row',
+    paddingHorizontal: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  dropdownItemTxtStyle: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#444',
+  },
+  
+  addressInput: {
+    width: '100%',
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#659349',
+    textColor: '#659349',
+    borderRadius: 5,
+    padding: 10,
+    textAlignVertical: 'center',
+    minHeight: 50,
+    fontSize: 16,
+  },
+  
 })
 
 export default CheckoutScreen

@@ -8,17 +8,6 @@
 
             <mat-grid-tile>
               <mat-form-field appearance="outline">
-                <mat-label>Ảnh</mat-label>
-                <!--<input matInput placeholder="Image" formControlName="image" type="file"/>-->
-                <ngx-mat-file-input formControlName="image" placeholder="Image"  accept=".png, .jpg, .jpeg"></ngx-mat-file-input>
-                <mat-error *ngIf="itemForm.get('image')?.hasError('required')">
-                  Phải chọn một hình ảnh
-                </mat-error>
-              </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile>
-              <mat-form-field appearance="outline">
                 <mat-label>Tên</mat-label>
                 <input matInput placeholder="Tên món" formControlName="name" />
                 <mat-error *ngIf="itemForm.get('name')?.hasError('required')">
@@ -38,7 +27,14 @@
             </mat-grid-tile>
 
             <mat-grid-tile>
-
+              <mat-form-field appearance="outline">
+                <mat-label>Ảnh</mat-label>
+                <!--<input matInput placeholder="Image" formControlName="image" type="file"/>-->
+                <ngx-mat-file-input formControlName="image" placeholder="Image" accept=".png, .jpg, .jpeg"></ngx-mat-file-input>
+                <mat-error *ngIf="itemForm.get('image')?.hasError('required')">
+                  Phải chọn một hình ảnh
+                </mat-error>
+              </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile>
