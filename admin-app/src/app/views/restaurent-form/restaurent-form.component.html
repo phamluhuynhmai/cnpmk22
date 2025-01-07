@@ -9,9 +9,9 @@
             <mat-grid-tile>
               <mat-form-field appearance="outline">
                 <mat-label>Tên</mat-label>
-                <input matInput placeholder="Nhập tên quán" formControlName="name" />
+                <input matInput placeholder="Nhập tên thể loại" formControlName="name" />
                 <mat-error *ngIf="restaurentForm.get('name')?.hasError('required')">
-                  Nhập vào tên quán ăn
+                  Nhập vào tên thể loại
                 </mat-error>
               </mat-form-field>
             </mat-grid-tile>
@@ -100,7 +100,7 @@
 
           </mat-grid-list>
         </form>
-          
+
       </mat-card>
     </div>
   </div>

@@ -7,48 +7,38 @@
 
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
-        
+
           <!-- Position Column -->
           <ng-container matColumnDef="Ref">
             <th mat-header-cell *matHeaderCellDef> STT </th>
             <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
           </ng-container>
-        
+
           <!-- Name Column -->
           <ng-container matColumnDef="Client">
             <th mat-header-cell *matHeaderCellDef> Khách hàng </th>
             <td mat-cell *matCellDef="let element">
               <div *ngFor="let client of clients">
                 <span *ngIf="element.clientId == client._id">{{client.name+' '+client.surname}}</span>
-                
+
               </div>
             </td>
           </ng-container>
-        
-          <!-- Weight Column -->
-          <ng-container matColumnDef="Restaurant">
-            <th mat-header-cell *matHeaderCellDef> Quán ăn </th>
-            <td mat-cell *matCellDef="let element">
-              <div>
-                {{restaurants | findRestaurant:element.restaurantId}}
-              </div>
-            </td>
-          </ng-container>
-        
+
           <!-- Symbol Column -->
           <ng-container matColumnDef="State">
             <th mat-header-cell *matHeaderCellDef> Địa điểm </th>
             <td mat-cell *matCellDef="let element"> {{element.state}} </td>
           </ng-container>
 
-                  
+
           <!-- Symbol Column -->
           <ng-container matColumnDef="Price">
             <th mat-header-cell *matHeaderCellDef> Giá </th>
             <td mat-cell *matCellDef="let element"> {{element.totalPrice}}  ₫ </td>
           </ng-container>
 
-                  
+
           <!-- Symbol Column -->
           <ng-container matColumnDef="Status">
             <th mat-header-cell *matHeaderCellDef> Tình trạng </th>
@@ -57,13 +47,13 @@
             </td>
           </ng-container>
 
-                            
+
           <!-- Symbol Column -->
           <ng-container matColumnDef="Employe">
             <th mat-header-cell *matHeaderCellDef> Người bán </th>
             <td mat-cell *matCellDef="let element">
               <div *ngFor="let worker of workers">
-                {{element.employeId == worker._id ? worker.name+' '+worker.surname : ""}} 
+                {{element.employeId == worker._id ? worker.name+' '+worker.surname : ""}}
               </div>
               {{element.employeId == null ? '&lt;Chưa phân công&gt;' : ''}}
             </td>
@@ -71,7 +61,7 @@
 
           <ng-container matColumnDef="Action">
             <th mat-header-cell *matHeaderCellDef> Thao tác </th>
-            <td mat-cell *matCellDef="let element">  
+            <td mat-cell *matCellDef="let element">
               <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
@@ -89,17 +79,17 @@
                   <span>Xóa đơn</span>
                 </button>
               </mat-menu>
-              
+
               <!-- Submenu cho danh sách người bán -->
               <mat-menu #workersMenu="matMenu">
-                <button mat-menu-item *ngFor="let worker of workers" 
+                <button mat-menu-item *ngFor="let worker of workers"
                         (click)="worker._id && assignWorker(element._id, worker._id)">
                   {{worker.name}} {{worker.surname}}
                 </button>
               </mat-menu>
             </td>
           </ng-container>
-        
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>

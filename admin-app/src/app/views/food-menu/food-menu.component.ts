@@ -16,16 +16,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class FoodMenuComponent implements OnInit {
 
   titre = "Menu"
-  displayedColumns: string[] = ['Id', 'Day', 'Name', 'Restaurant', 'Action'];
-  dataSource:Menu[] = [] 
+  displayedColumns: string[] = ['Id', 'Day', 'Name', 'Action'];
+  dataSource:Menu[] = []
   restaurants:Restaurant[] = [];
   id: string;
 
   constructor(
-    private foodmenuService: FoodmenuService, 
+    private foodmenuService: FoodmenuService,
     private restaurantService: RestaurantService,
-    private itemService: ItemService, 
-    private router: Router, 
+    private itemService: ItemService,
+    private router: Router,
     private activateRoute : ActivatedRoute,
     private _snackBar: MatSnackBar,
   ) { this.id = String(activateRoute.snapshot.paramMap.get('id')); }
@@ -50,7 +50,7 @@ export class FoodMenuComponent implements OnInit {
       this.restaurants = data.restaurants
     })
   }
-  
+
   getMenuItems(id: string) {
     this.router.navigate([`/admin/menuitem/${id}`])
   }

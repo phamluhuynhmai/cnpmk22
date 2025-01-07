@@ -12,15 +12,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class RestaurentComponent implements OnInit {
 
-  titre = "Quán ăn"
-  displayedColumns: string[] = ['Id', 'Image', 'Name', 'Speciality','Address','Phone', 'Action'];
+  titre = "Thể loại thực đơn"
+  displayedColumns: string[] = ['Id', 'Image', 'Name', 'Speciality', 'Action'];
   dataSource:Restaurant[] = [];
 
 
   constructor(
-    private restaurantService: RestaurantService, 
+    private restaurantService: RestaurantService,
     private foodMenuService: FoodmenuService,
-    private router: Router, 
+    private router: Router,
     private _snackBar: MatSnackBar,
   ) { }
 
@@ -45,7 +45,7 @@ export class RestaurentComponent implements OnInit {
   deleteRestaurent(id:string) {
     this.foodMenuService.getListMenu(id).subscribe((data) => {
       if (data.menus.length > 0) {
-        this._snackBar.open('Xóa không thành công: quán ăn có menu', 'Done');
+        this._snackBar.open('Xóa không thành công: Thể loại có menu', 'Done');
         return;
       }
     })

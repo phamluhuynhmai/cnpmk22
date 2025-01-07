@@ -14,16 +14,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class WorkersComponent implements OnInit {
 
   constructor(
-    private workerService: WorkerService, 
+    private workerService: WorkerService,
     private restaurantService: RestaurantService,
-    private router: Router, 
+    private router: Router,
     private _snackBar: MatSnackBar,
   ) { }
 
   titre = "Người bán"
 
-  displayedColumns: string[] = ['Name', 'Surname', 'Phone', 'Email', 'Restaurant', 'Available', 'Action'];
-  
+  displayedColumns: string[] = ['Name', 'Surname', 'Phone', 'Email', 'Available', 'Action'];
+
   dataSource:Employe[] = [];
   restaurants:Restaurant[] = [];
 

@@ -23,17 +23,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class OrdersComponent implements OnInit {
 
   constructor(
-    private workerService: WorkerService, 
+    private workerService: WorkerService,
     private orderService:OrderService,
     private restaurantService: RestaurantService,
-    private userService: UserService, 
-    private _snackBar: MatSnackBar, 
-    private router: Router, 
+    private userService: UserService,
+    private _snackBar: MatSnackBar,
+    private router: Router,
     private activateRoute : ActivatedRoute,
   ) { }
 
   titre = "Đơn hàng"
-  displayedColumns: string[] = ['Ref', 'Client', 'Restaurant', 'State','Price', 'Status', 'Employe','Action'];
+  displayedColumns: string[] = ['Ref', 'Client', 'State','Price', 'Status', 'Employe','Action'];
   dataSource:Order[]= [];
   workers:Employe[] = [];
   clients:Client[] = [];

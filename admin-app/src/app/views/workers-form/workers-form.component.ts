@@ -32,11 +32,11 @@ export class WorkersFormComponent implements OnInit {
 
   constructor(
     private workerService:WorkerService,
-    private RestaurantService: RestaurantService, 
-    private router: Router, 
+    private RestaurantService: RestaurantService,
+    private router: Router,
     private _snackBar: MatSnackBar,
-    private activateRoute: ActivatedRoute, 
-  ) { 
+    private activateRoute: ActivatedRoute,
+  ) {
       this.id = String(activateRoute.snapshot.paramMap.get('id'));
       this.action = String(activateRoute.snapshot.paramMap.get('action'));
     }
@@ -64,11 +64,11 @@ export class WorkersFormComponent implements OnInit {
     if(this.action == "edit") {
       this.workerService.updateWorker(
         this.id,
-        this.workerForm.get('name')?.value, 
+        this.workerForm.get('name')?.value,
         this.workerForm.get('surname')?.value,
-        this.workerForm.get('phone')?.value, 
+        this.workerForm.get('phone')?.value,
         this.workerForm.get('email')?.value,
-        this.workerForm.get('password')?.value, 
+        this.workerForm.get('password')?.value,
         this.workerForm.get('state')?.value,
         this.workerForm.get('restaurantId')?.value
       )
@@ -83,16 +83,13 @@ export class WorkersFormComponent implements OnInit {
       });
     }else {
       var id = this.workerForm.get('restaurantId')?.value
-      console.log(id)
       var state = this.dataSource.find(p => p._id == id)?.state
-      console.log(state)
       this.workerService.createWorker(
-        this.workerForm.get('name')?.value, 
+        this.workerForm.get('name')?.value,
         this.workerForm.get('surname')?.value,
-        this.workerForm.get('phone')?.value, 
+        this.workerForm.get('phone')?.value,
         this.workerForm.get('email')?.value,
-        this.workerForm.get('password')?.value, 
-        // this.workerForm.get('state')?.value,
+        this.workerForm.get('password')?.value,
         state,
         id
       )

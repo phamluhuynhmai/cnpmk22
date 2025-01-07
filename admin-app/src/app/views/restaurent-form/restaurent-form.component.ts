@@ -27,16 +27,16 @@ export class RestaurentFormComponent implements OnInit {
   wards: string[] = []
 
   constructor(
-    private restaurantService: RestaurantService, 
-    private router: Router, 
+    private restaurantService: RestaurantService,
+    private router: Router,
     private _snackBar: MatSnackBar,
-    private activateRoute: ActivatedRoute, 
-  ) { 
+    private activateRoute: ActivatedRoute,
+  ) {
       this.id = String(activateRoute.snapshot.paramMap.get('id'));
       this.action = String(activateRoute.snapshot.paramMap.get('action'));
     }
 
-  titre = "Thông tin quán ăn"
+  titre = "Thông tin thể loại"
 
   ngOnInit(): void {
     if(this.action == 'add'){
@@ -50,11 +50,11 @@ export class RestaurentFormComponent implements OnInit {
     console.log(this.restaurentForm)
     if(this.action == "add" ) {
       this.restaurantService.createRestaurent(
-        this.restaurentForm.get('name')?.value, 
+        this.restaurentForm.get('name')?.value,
         this.restaurentForm.get('state')?.value,
-        this.restaurentForm.get('image')?.value, 
+        this.restaurentForm.get('image')?.value,
         this.restaurentForm.get('speciality')?.value,
-        this.restaurentForm.get('address')?.value, 
+        this.restaurentForm.get('address')?.value,
         this.restaurentForm.get('phone')?.value
       )
       .subscribe((data) => {
@@ -68,11 +68,11 @@ export class RestaurentFormComponent implements OnInit {
     }else {
       this.restaurantService.updateRestaurent(
         this.id,
-        this.restaurentForm.get('name')?.value, 
+        this.restaurentForm.get('name')?.value,
         this.restaurentForm.get('state')?.value,
-        this.restaurentForm.get('image')?.value, 
+        this.restaurentForm.get('image')?.value,
         this.restaurentForm.get('speciality')?.value,
-        this.restaurentForm.get('address')?.value, 
+        this.restaurentForm.get('address')?.value,
         this.restaurentForm.get('phone')?.value
       )
       .subscribe((data) => {

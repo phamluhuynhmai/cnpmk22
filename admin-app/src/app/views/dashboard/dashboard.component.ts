@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
 
   clients = 0
   empolyes = 0
-  restaurants = 0   
+  menus = 0
   orders = 0
 
   constructor(private dashService: DashService,) { }
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
     this.dashService.dash().subscribe((data) => {
       this.clients = data.clients;
       this.empolyes = data.empolyes;
-      this.restaurants = data.restaurants;
+      this.menus = data.menus;
       this.orders = data.orders;
     })
   }
