@@ -22,6 +22,7 @@ const CheckoutScreen = ({ navigation }) => {
   
   const [district, setDistrict] = useState("");
   const [address, setAddress] = useState("");
+  const [cost, setCost] = useState(0);
   const districts = districtsImported;
 
   const cart = useSelector((state) => state.cart);
@@ -60,7 +61,7 @@ const CheckoutScreen = ({ navigation }) => {
       clientId: route.params.user._id,
       items: cart,
       restaurantId: route.params.restaurant._id,
-      totalPrice:totalPrice,
+      totalPrice:totalPrice + cost,
       paymentType: "Cash on delivery",
       paid: false,
       
@@ -121,13 +122,12 @@ const CheckoutScreen = ({ navigation }) => {
               </TouchableOpacity>
             ))
           }
-          <Text style={{fontSize:15, fontWeight:'bold', color: '#659349', marginLeft:5} }></Text>
           <Button 
             mode="text" 
             textColor='#659349'
             style={styles.button}
           >
-              Tổng cộng: {totalPrice} ₫
+              Tổng cộng: {totalPrice + (cost > 0 ? (' + ship ' + cost + ' = ' + (totalPrice + cost)) : '')} ₫
           </Button>
           <Text style={{fontSize:20, fontWeight:'bold', color: '#3C4048', marginBottom:10}}>Nhập địa chỉ giao hàng</Text>
 
@@ -135,6 +135,7 @@ const CheckoutScreen = ({ navigation }) => {
             data={districts}
             onSelect={(selectedItem, index) => {
               setDistrict(selectedItem)
+              setCost(selectedItem.cost)
             }}
             renderButton={(selectedItem, isOpened) => {
               return (

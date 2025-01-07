@@ -56,9 +56,11 @@ const RestaurentsScreen = ({ navigation }) => {
     return () => backHandler.remove();
   }, []);
 
+  const [menuTitle, setMenuTitle] = useState('')
   const [restaurants, setRestaurants] = useState([])
   const [menus, setMenus] = useState([])
   const [orders, setOrders] = useState([])
+  const [recentMenus, setRecentMenus] = useState([])
   const [backup, setBackup] = useState([])
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -87,7 +89,6 @@ const RestaurentsScreen = ({ navigation }) => {
     .then((result) => {
       if(result.data.success){
         setRestaurants(result.data.restaurants)
-        // setBackup(result.data.restaurants)
       }
     })
     await axios.get(`${API}/menus/get`)
@@ -100,7 +101,17 @@ const RestaurentsScreen = ({ navigation }) => {
     await axios.get(`${API}/orders/history/${route.params.user._id}`)
     .then((result) => {
       if(result.data.success) {
-        setOrders(result.data.orders);
+        var _orders = result.data.orders
+        _orders.sort((a, b) => {return a._id > b._id ? -1 : a._id < b._id})
+        setOrders(_orders);
+        
+        var query = []
+        orders.forEach(order => order.items.forEach(item => {
+          if (query.length < 3 && !query.includes(item.menuId))
+            query.push(item.menuId)
+          }
+        ))
+        setRecentMenus(query)
       }
     })
   }
@@ -117,9 +128,16 @@ const RestaurentsScreen = ({ navigation }) => {
   }
 
   const searchBySpeciality = (Speciality) => {
-    if(Speciality == 'all' ){
+    if (Speciality == 'all' ) {
       setMenus(backup)
-    }else {
+      setMenuTitle('')
+    }
+    else if (Speciality == 'recent') {
+      const query = backup.filter((item) => recentMenus.includes(item._id))
+      setMenus(query)
+      setMenuTitle('Dựa trên lịch sử đặt hàng')
+    }
+    else {
       console.log(Speciality)
       const query = backup.filter((item) => {
         const item_data = `${restaurants.find(p => p._id == item.restaurantId).speciality.toUpperCase()}`;
@@ -127,6 +145,7 @@ const RestaurentsScreen = ({ navigation }) => {
         return item_data.indexOf(text_data) > -1;
       });
       setMenus(query);
+      setMenuTitle('Thể loại: ' + Speciality)
     }
   }
 
@@ -204,6 +223,17 @@ const RestaurentsScreen = ({ navigation }) => {
             </Chip>
 
             <Chip 
+              mode='outlined'
+              // avatar={<Avatar.Image size={24} source={require('./../../assets/resetfood.jpeg')} />}
+              onPress={() => searchBySpeciality("recent")} 
+              style={styles.chip}
+              textStyle={styles.chipText}
+              disabled={orders.length == 0}
+            >
+              Gần đây
+            </Chip>
+
+            <Chip 
               mode='outlined' 
               avatar={<Avatar.Image size={24} source={require('./../../assets/foods.jpg')} />}
               onPress={() => searchBySpeciality("Foods")} 
@@ -275,92 +305,7 @@ const RestaurentsScreen = ({ navigation }) => {
             </Chip>
           </View>
         </ScrollView>
-        <Text style={styles.sectionTitle}>
-          {orders.length ? '\nĐặt lại' : ''}
-        </Text>
-        {
-          (orders[orders.length - 1] || {items: []}).items.map((item, index) => {
-            if (index > 2)
-              return
-            return (
-            <TouchableOpacity 
-              key={index}
-              style={styles.card} 
-              disabled={true}
-            >
-              <Image source={{uri: HOST+item.image}} style={{width:"100%",height:200}}/>
-              <View style={{ flexDirection: "row", alignItems: 'center'}}>
-              <View style={{ flex: 1 }}>
-                
-                <Text style={{fontSize:20, fontWeight:'bold',marginVertical:5}}> {item.name}</Text>
-                <View 
-                  style={{ 
-                    flexDirection: "row", 
-                    marginLeft:5,
-                    alignItems:'center' ,
-                    marginVertical:5
-                  }}
-                >
-                  <Ionicons 
-                    name="time-outline" 
-                    color="gray" 
-                    size={15}
-                  />
-                  <Text 
-                    style={{
-                      color:"gray", 
-                      marginLeft:5
-                    }}
-                  >
-                    20-30 phút
-                  </Text>
-                  <Text>  </Text>
-                  <Ionicons 
-                    name="star" 
-                    color="orange" 
-                    size={15}
-                  />
-                  <Text            
-                    style={{
-                      color:"gray", 
-                      marginLeft:5
-                    }}>
-                    5
-                  </Text>
-                </View>
-    
-                <View 
-                  style={{ 
-                    flexDirection: "row", 
-                    marginLeft:5,
-                    alignItems:'center',
-                    marginVertical:5
-                  }}
-                >
-                  <Ionicons 
-                    name="pricetag-outline" 
-                    color={MD2Colors.black500} 
-                    size={15}
-                  />
-                  <Text style={{fontSize:20, fontWeight:'bold', color: MD2Colors.black500, marginLeft:5} }>
-                    {item.price} ₫
-                  </Text>
-                </View>
-              </View>
-              <IconButton
-                icon="cart"
-                color={MD2Colors.blue500}
-                size={30}
-                onPress={() =>
-                  // console.log(item)
-                  dispatch(addToCart(item))
-                }
-              />
-            </View>
-            </TouchableOpacity>
-          )})
-        }
-        <Text style={styles.sectionTitle}>Thực đơn</Text>
+        <Text style={styles.sectionTitle}>{menuTitle || 'Tất cả thực đơn'}</Text>
         {
           menus.map((menu, index) => (
             <TouchableOpacity 

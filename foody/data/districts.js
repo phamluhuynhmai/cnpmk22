@@ -1,6 +1,7 @@
 export const districts = [
     {
       title: 'Quận 1',
+      cost: 12000,
       value: [
         'Bến Nghé',
         'Bến Thành',
@@ -16,6 +17,7 @@ export const districts = [
     },
     {
       title: 'Quận 3',
+      cost: 12000,
       value: [
         '1',
         '2',
@@ -31,6 +33,7 @@ export const districts = [
     },
     {
       title: 'Quận 4',
+      cost: 12000,
       value: [
         '1',
         '2',
@@ -46,6 +49,7 @@ export const districts = [
     },
     {
       title: 'Quận 5',
+      cost: 0,
       value: [
         '1',
         '2',
@@ -61,6 +65,7 @@ export const districts = [
     },
     {
       title: 'Quận 6',
+      cost: 15000,
       value: [
         '1',
         '2',
@@ -76,6 +81,7 @@ export const districts = [
     },
     {
       title: 'Quận 7',
+      cost: 20000,
       value: [
         'Bình Thuận',
         'Phú Mỹ',
@@ -91,6 +97,7 @@ export const districts = [
     },
     {
       title: 'Quận 8',
+      cost: 20000,
       value: [
         '4',
         '5',
@@ -106,6 +113,7 @@ export const districts = [
     },
     {
       title: 'Quận 10',
+      cost: 13000,
       value: [
         '1',
         '2',
@@ -122,6 +130,7 @@ export const districts = [
     },
     {
       title: 'Quận 11',
+      cost: 15000,
       value: [
         '1',
         '3',
@@ -137,6 +146,7 @@ export const districts = [
     },
     {
       title: 'Quận 12',
+      cost: 40000,
       value: [
         'An Phú Đông',
         'Đông Hưng Thuận',
@@ -153,6 +163,7 @@ export const districts = [
     },
     {
       title: 'Quận Bình Tân',
+      cost: 25000,
       value: [
         'An Lạc',
         'An Lạc A',
@@ -168,6 +179,7 @@ export const districts = [
     },
     {
       title: 'Quận Bình Thạnh',
+      cost: 30000,
       value: [
         '1',
         '2',
@@ -188,6 +200,7 @@ export const districts = [
     },
     {
       title: 'Quận Gò Vấp',
+      cost: 35000,
       value: [
         '1',
         '2',
@@ -208,6 +221,7 @@ export const districts = [
     },
     {
       title: 'Quận Phú Nhuận',
+      cost: 25000,
       value: [
         '1',
         '2',
@@ -224,6 +238,7 @@ export const districts = [
     },
     {
       title: 'Quận Tân Bình',
+      cost: 25000,
       value: [
         '1',
         '2',
@@ -244,6 +259,7 @@ export const districts = [
     },
     {
       title: 'Quận Tân Phú',
+      cost: 25000,
       value: [
         'Hiệp Tân',
         'Hòa Thạnh',
@@ -260,6 +276,7 @@ export const districts = [
     },
     {
       title: 'Thành phố Thủ Đức',
+      cost: 35000,
       value: [
         'An Khánh',
         'An Lợi Đông',
@@ -299,6 +316,7 @@ export const districts = [
     },
     {
       title: 'Huyện Bình Chánh',
+      cost: 30000,
       value: [
         'Thị trấn Tân Túc',
         'An Phú Tây',
@@ -320,6 +338,7 @@ export const districts = [
     },
     {
       title: 'Huyện Cần Giờ',
+      cost: 45000,
       value: [
         'Thị trấn Cần Thạnh',
         'An Thới Đông',
@@ -332,6 +351,7 @@ export const districts = [
     },
     {
       title: 'Huyện Củ Chi',
+      cost: 50000,
       value: [
         'Thị trấn Củ Chi',
         'An Nhơn Tây',
@@ -358,6 +378,7 @@ export const districts = [
     },
     {
       title: 'Huyện Hóc Môn',
+      cost: 45000,
       value: [
         'Thị trấn Hóc Môn',
         'Bà Điểm',
@@ -375,6 +396,7 @@ export const districts = [
     },
     {
       title: 'Huyện Nhà Bè',
+      cost: 30000,
       value: [
         'Thị trấn Nhà Bè',
         'Hiệp Phước',
