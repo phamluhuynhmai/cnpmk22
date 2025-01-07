@@ -102,7 +102,6 @@ const RestaurentsScreen = ({ navigation }) => {
       if(result.data.success) {
         var _orders = result.data.orders
         _orders.sort((a, b) => {return a._id > b._id ? -1 : a._id < b._id})
-        setOrders(_orders);
         
         var query = []
         _orders.forEach(order => order.items.forEach(item => {
