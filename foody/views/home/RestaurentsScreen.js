@@ -59,7 +59,6 @@ const RestaurentsScreen = ({ navigation }) => {
   const [menuTitle, setMenuTitle] = useState('')
   const [restaurants, setRestaurants] = useState([])
   const [menus, setMenus] = useState([])
-  const [orders, setOrders] = useState([])
   const [recentMenus, setRecentMenus] = useState([])
   const [backup, setBackup] = useState([])
   const [searchQuery, setSearchQuery] = useState('');
@@ -106,7 +105,7 @@ const RestaurentsScreen = ({ navigation }) => {
         setOrders(_orders);
         
         var query = []
-        orders.forEach(order => order.items.forEach(item => {
+        _orders.forEach(order => order.items.forEach(item => {
           if (query.length < 3 && !query.includes(item.menuId))
             query.push(item.menuId)
           }
@@ -228,7 +227,7 @@ const RestaurentsScreen = ({ navigation }) => {
               onPress={() => searchBySpeciality("recent")} 
               style={styles.chip}
               textStyle={styles.chipText}
-              disabled={orders.length == 0}
+              disabled={recentMenus.length == 0}
             >
               Gần đây
             </Chip>
