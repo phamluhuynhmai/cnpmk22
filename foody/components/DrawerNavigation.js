@@ -74,7 +74,7 @@ const TabNavigation = ({ navigation }) => {
         name="Restaurents" 
         component={RestaurentsScreen} 
         initialParams={{ user: route.params.user }} 
-        options={{ title: 'Quán ăn' }} 
+        options={{ title: 'Thực đơn' }} 
       />
       <Tab.Screen 
         name="History" 

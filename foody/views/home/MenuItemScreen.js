@@ -116,7 +116,10 @@ const MenuItemScreen = ({ navigation }) => {
         />
 
         {
-          menuItems.map((item, index) => (
+          menuItems.map((item, index) => {
+            if (item.menuId != route.params.menu._id)
+              return
+            return (
             <TouchableOpacity 
               key={index}
               style={styles.card} 
@@ -189,7 +192,7 @@ const MenuItemScreen = ({ navigation }) => {
               />
             </View>
             </TouchableOpacity>
-          ))
+          )})
         }
       </View>
     </ScrollView>

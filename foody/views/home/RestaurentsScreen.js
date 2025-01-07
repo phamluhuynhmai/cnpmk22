@@ -57,6 +57,7 @@ const RestaurentsScreen = ({ navigation }) => {
   }, []);
 
   const [restaurants, setRestaurants] = useState([])
+  const [menus, setMenus] = useState([])
   const [orders, setOrders] = useState([])
   const [backup, setBackup] = useState([])
   const [searchQuery, setSearchQuery] = useState('');
@@ -86,7 +87,14 @@ const RestaurentsScreen = ({ navigation }) => {
     .then((result) => {
       if(result.data.success){
         setRestaurants(result.data.restaurants)
-        setBackup(result.data.restaurants)
+        // setBackup(result.data.restaurants)
+      }
+    })
+    await axios.get(`${API}/menus/get`)
+    .then((result) => {
+      if(result.data.success){
+        setMenus(result.data.menus)
+        setBackup(result.data.menus)
       }
     })
     await axios.get(`${API}/orders/history/${route.params.user._id}`)
@@ -104,21 +112,21 @@ const RestaurentsScreen = ({ navigation }) => {
       return item_data.indexOf(text_data) > -1;
     });
     setSearchQuery(text);
-    setRestaurants(query);
+    setMenus(query);
     console.log(query);
   }
 
   const searchBySpeciality = (Speciality) => {
     if(Speciality == 'all' ){
-      setRestaurants(backup)
+      setMenus(backup)
     }else {
       console.log(Speciality)
       const query = backup.filter((item) => {
-        const item_data = `${item.speciality.toUpperCase()}`;
+        const item_data = `${restaurants.find(p => p._id == item.restaurantId).speciality.toUpperCase()}`;
         const text_data = Speciality.toUpperCase();
         return item_data.indexOf(text_data) > -1;
       });
-      setRestaurants(query);
+      setMenus(query);
     }
   }
 
@@ -352,16 +360,16 @@ const RestaurentsScreen = ({ navigation }) => {
             </TouchableOpacity>
           )})
         }
-        <Text style={styles.sectionTitle}>Quán ăn</Text>
+        <Text style={styles.sectionTitle}>Thực đơn</Text>
         {
-          restaurants.map((restaurant, index) => (
+          menus.map((menu, index) => (
             <TouchableOpacity 
               key={index}
               style={styles.card} 
-              onPress={() => navigation.navigate('MenuItemScreen', { restaurant:restaurant, user:route.params.user })}
+              onPress={() => navigation.navigate('MenuItemScreen', { restaurant:restaurants.find(p => p._id == menu.restaurantId), menu:menu, user:route.params.user })}
             >
-              <Image source={{uri: HOST+restaurant.image}} style={{width:"100%",height:200}}/>
-              <Text style={{ fontSize:20, fontWeight:'bold',marginVertical:5}}>{restaurant.name} </Text>
+              <Image source={{uri: HOST+restaurants.find(p => p._id == menu.restaurantId).image}} style={{width:"100%",height:200}}/>
+              <Text style={{ fontSize:20, fontWeight:'bold',marginVertical:5}}>{menu.name} </Text>
               <View 
                 style={{
                   flexDirection: "row", 
@@ -369,32 +377,6 @@ const RestaurentsScreen = ({ navigation }) => {
                   marginVertical:5
                 }} 
               >
-                <Ionicons 
-                  name="location-outline" 
-                  color="gray" 
-                  size={15}
-                />
-                <Text 
-                  style={{
-                    color:"gray", 
-                    marginLeft:5
-                  }}
-                >
-                  {restaurant.address}, {restaurant.state}
-                </Text>
-                <Text>  </Text>
-                <Ionicons 
-                  name="star" 
-                  color="orange" 
-                  size={15}
-                />
-                <Text            
-                  style={{
-                    color:"gray", 
-                    marginLeft:5
-                  }}>
-                  5
-                </Text>
               </View>
 
               <View 
@@ -403,20 +385,6 @@ const RestaurentsScreen = ({ navigation }) => {
                   alignItems:'center' 
                 }} 
               >
-                <Ionicons 
-                  name="call-outline" 
-                  color="gray" 
-                  size={15}
-                />
-                <Text 
-                  style={{
-                    color:"gray", 
-                    marginLeft:5
-                  }}
-                >
-                  {restaurant.phone}
-                </Text>
-                <Text>  </Text>
                 <MaterialCommunityIcons 
                   name="chef-hat" 
                   color="gray" 
@@ -428,7 +396,7 @@ const RestaurentsScreen = ({ navigation }) => {
                     marginLeft:5
                   }}
                 >
-                  Thể loại: {restaurant.speciality}
+                  Thể loại: {restaurants.find(p => p._id == menu.restaurantId).speciality}
                 </Text>
                 <Text>  </Text>
               </View>

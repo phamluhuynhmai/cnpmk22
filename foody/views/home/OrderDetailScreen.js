@@ -53,7 +53,6 @@ const OrderDetailScreen = ({ navigation }) => {
             key={index}
             style={styles.card} 
             // onPress={() => navigation.navigate('MenuItemScreen', {restaurant: restaurants.find(r => r._id == order.restaurantID)})}
-            // cái này lỗi cmnr
           >
             <View style={styles.cardcontent}>
               <Image style={styles.cardimage} source={{uri: HOST+order.image}} />
